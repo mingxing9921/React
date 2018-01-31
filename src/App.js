@@ -8,7 +8,7 @@ import {MUSIC_LIST} from './config/musiclist';
 import MusicList from './page/musiclist';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import Pubsub from 'pubsub-js';
-// 家里git测试
+// 家里git 测试 
 class App extends Component {
   constructor() {
     super()
