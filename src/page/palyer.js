@@ -4,23 +4,42 @@ import 'jplayer'
 import $ from 'jquery';
 import Cover from '../components/cover'
 import {Link} from 'react-router-dom';
-let duration = null;
+import Pubsub from 'pubsub-js';
+
 class Player extends Component {
     constructor() {
         super()
         this.state = {
             progress: 0,
             volume: 0,
-            isPlay: true
+            isPlay: true,
+            leftTime: '',
+            duration: 0
         }
+    }
+    playPrev() {
+        Pubsub.publish('PLAY_PREV');
+    };
+    playNext() {
+        Pubsub.publish('PLAY_NEXT');
+    }
+    formatTime(time) {
+        time = Math.floor(time);
+        let minutes = Math.floor(time / 60);
+        let seconds = Math.floor(time % 60);
+        seconds = seconds < 10
+            ? `0${seconds}`
+            : seconds;
+        return `${minutes}:${seconds}`
     }
     componentDidMount() {
         $('#player').bind($.jPlayer.event.timeupdate, (e) => {
 
-            duration = e.jPlayer.status.duration;
             this.setState({
+                duration: e.jPlayer.status.duration,
                 volume: (e.jPlayer.options.volume) * 100,
-                progress: e.jPlayer.status.currentPercentAbsolute
+                progress: e.jPlayer.status.currentPercentAbsolute,
+                leftTime: this.formatTime(this.state.duration * (1 - e.jPlayer.status.currentPercentAbsolute / 100))
             });
         });
     }
@@ -28,7 +47,7 @@ class Player extends Component {
         $('#player').unbind($.jPlayer.event.timeupdate);
     }
     progressChangeHandler(progress) {
-        $('#player').jPlayer('play', duration * progress);
+        $('#player').jPlayer('play', this.state.duration * progress);
     }
     volumeChangeHander(progress) {
         $("#player").jPlayer('volume', progress);
@@ -47,13 +66,15 @@ class Player extends Component {
     render() {
         return (
             <div className="player-page">
-                <h1 className="caption">我的私人音乐坊</h1>
+                <h1 className="caption">
+                    <Link to="/list">我的私人音乐坊 &gt;</Link>
+                </h1>
                 <div className="mt20 row">
                     <div className="controll-wrapper">
                         <h2 className="music-title">{this.props.currentMusicItem.title}</h2>
                         <h3 className="music-artist mt10">{this.props.currentMusicItem.artist}</h3>
                         <div className="row mt20">
-                            <div className="left-time -col-auto">-2:00</div>
+                            <div className="left-time -col-auto">-{this.state.leftTime}</div>
                             <div className="volume-container">
                                 <i
                                     className="icon-volume rt"
@@ -83,7 +104,7 @@ class Player extends Component {
                         </div>
                         <div className="mt35 row">
                             <div>
-                                <i className="icon prev"></i>
+                                <i className="icon prev" onClick={this.playPrev}></i>
                                 <i
                                     className={`icon ml20 ${this.state.isPlay
                                     ? 'pause'
@@ -91,7 +112,7 @@ class Player extends Component {
                                     onClick={this
                                     .play
                                     .bind(this)}></i>
-                                <i className="icon next ml20"></i>
+                                <i className="icon next ml20" onClick={this.playNext}></i>
                             </div>
                             <div className="-col-auto">
                                 <i className="icon repeat-cycle"></i>
