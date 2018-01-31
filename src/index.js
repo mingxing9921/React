@@ -6,5 +6,7 @@ import registerServiceWorker from './registerServiceWorker';
 import './css/reset.css'
 import './css/common.css'
 
-ReactDOM.render(<App />, document.getElementById('root'));
+//同步测试
+ReactDOM.render(
+    <App/>, document.getElementById('root'));
 registerServiceWorker();
