@@ -1,0 +1,41 @@
+import React, { Component } from 'react';
+import './App.css';
+import ComponenteHeader from './components/header';
+import 'jplayer'
+import $ from 'jquery';
+import Player from './page/palyer'
+import {MUSIC_LIST} from './config/musiclist.js';
+class App extends Component {
+    constructor() {
+      super()
+      this.state={
+        currentMusicItem:MUSIC_LIST[0],
+      }
+    }
+    
+    
+      componentDidMount() {
+         $('#player').jPlayer({
+             ready:function(){
+                 $(this).jPlayer('setMedia',{
+                     mp3:'http://m10.music.126.net/20180129155900/34eddfbfdcfe7d8c1f551a2fbae4f7cb/ymusic/14dd/6b1d/135c/5d37f8a4aa0cc5b1e6139c002c52acef.mp3'
+                 }).jPlayer('play');
+             },
+             supplied:"mp3",
+             wmode:'window'
+         });
+          
+      }
+     
+      
+  render() {
+    return (
+      <div className="App">
+        <ComponenteHeader></ComponenteHeader>
+        <Player currentMusicItem={this.state.currentMusicItem}></Player>
+      </div>
+    );
+  }
+}
+
+export default App;

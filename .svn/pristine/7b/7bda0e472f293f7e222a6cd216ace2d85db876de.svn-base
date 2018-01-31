@@ -1,0 +1,114 @@
+.components-header {
+  box-sizing: border-box;
+  padding: 15px 25px;
+  border-bottom: 1px solid #ccc;
+  background: white;
+}
+.components-header .caption {
+  font-size: 20px;
+  text-indent: 20px;
+}
+.components-progress {
+  margin-top: 20px;
+  width: 100%;
+  height: 3px;
+  background: #ddd;
+  cursor: pointer;
+}
+.components-progress .progress {
+  width: 5%;
+  height: 3px;
+  background: #2f9842;
+}
+.player-page {
+  width: 700px;
+  margin: auto;
+  margin-top: 120px;
+}
+.player-page .caption {
+  font-size: 16px;
+  color: #31c27c;
+}
+.player-page .cover {
+  width: 180px;
+  height: 180px;
+  margin-left: 20px;
+}
+.player-page .cover img {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  box-shadow: 0 0 14px #000000;
+  animation: rotate 25s linear infinite;
+}
+.player-page img.pause {
+  animation-play-state: paused;
+}
+.player-page .volume-container {
+  position: relative;
+  left: 20px;
+  top: -3px;
+}
+.player-page .volume-container .volume-wrapper {
+  opacity: 0;
+  transition: opacity .5s linear;
+}
+.player-page .volume-container:hover .volume-wrapper {
+  opacity: 1;
+}
+.player-page .music-title {
+  font-size: 25px;
+  font-weight: 400;
+  color: rgba(225, 225, 225, 0.8);
+  height: 36px;
+  line-height: 36px;
+}
+.player-page .music-artist {
+  font-size: 15px;
+  font-weight: 400;
+  color: rgba(225, 225, 225, 0.8);
+}
+.player-page .left-time {
+  font-size: 14px;
+  color: #999;
+  font-weight: 400;
+  width: 60px;
+  margin-top: 10px;
+}
+.player-page .icon {
+  cursor: pointer;
+}
+.player-page .ml20 {
+  margin-left: 20px;
+}
+.player-page .mt35 {
+  margin-top: 35px;
+}
+.player-page .volume-wrapper {
+  width: 60px;
+  display: inline-block;
+}
+.coverBox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  filter: blur(65px);
+  -webkit-filter: blur(65px);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50%;
+  opacity: .6;
+  overflow: hidden;
+  z-index: -999;
+}
+.coverBg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: -998;
+  background-color: rgba(0, 0, 0, 0.35);
+}

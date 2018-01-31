@@ -1,0 +1,13 @@
+import React, { Component } from 'react';
+
+class Progress extends Component {
+    render() {
+        return (
+            <div className="components-progress">
+                <div className="progress" style={{width:`${this.props.Progress}%`}}></div>
+            </div>
+        );
+    }
+}
+
+export default Progress;
